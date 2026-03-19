@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendOtpMail = async (to, token) => {
 
-  const resetLink = `https://videohub-frontend-7037.onrender.com/reset-password?email=${to}&token=${token}`;
+  const resetLink = `https://youtube-frontend-tp0q.onrender.com/reset-password?email=${to}&token=${token}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL,
