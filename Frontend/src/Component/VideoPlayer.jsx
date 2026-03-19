@@ -6,7 +6,7 @@ const VideoPlayer = ({ videoId }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   // const BASE_URL = "http://localhost:5000/streams";
-  const BASE_URL = "https://videohub-7vd0.onrender.com/streams";
+  const BASE_URL = "https://youtube-backend-n2na.onrender.com/streams";
 
   const availableResolutions = [
     { label: "360p", src: `${BASE_URL}/${videoId}/360p/index.m3u8` },
