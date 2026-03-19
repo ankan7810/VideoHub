@@ -14,3 +14,12 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+
+
+
+
+
+# MONGO_URI="mongodb+srv://ankanr596_db_user:orJgrVYy1j5BVB4u@cluster0.kh78w45.mongodb.net/video-streaming?retryWrites=true&w=majority"
+# MONGO_URI="mongodb://127.0.0.1:27017/video-streaming"
