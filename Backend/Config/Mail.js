@@ -8,7 +8,7 @@ dotenv.config({
 const transporter = nodemailer.createTransport({
   host:'smtp.gmail.com',
   port:587,
-  secure:false,
+  secure:true,
   auth:{
     user:process.env.EMAIL,
     pass:process.env.EMAIL_PASSWORD
@@ -58,9 +58,9 @@ export const sendOtpMail = async (to, token) => {
   <p style="font-size:12px; color:gray">
 
   By using VideHub you agree to our  
-  <a href="https://videohub-frontend-7037.onrender.com/privacy-policy">Privacy Policy</a>  
+  <a href="https://youtube-frontend-tp0q.onrender.com/privacy-policy">Privacy Policy</a>  
   and  
-  <a href="https://videohub-frontend-7037.onrender.com/terms">Terms of Service</a>.
+  <a href="https://youtube-frontend-tp0q.onrender.com/terms">Terms of Service</a>.
 
   </p>
 
@@ -99,9 +99,9 @@ export const sendRegistertationMail=async(to,name) => {
   <p style="font-size:12px; color:gray">
 
   By using VideHub you agree to our  
-  <a href="http://localhost:5173/privacy-policy">Privacy Policy</a>  
-  and  
-  <a href="http://localhost:5173/terms">Terms of Service</a>.
+  // <a href="http://localhost:5173/privacy-policy">Privacy Policy</a>  
+  // and  
+  // <a href="http://localhost:5173/terms">Terms of Service</a>.
 
   </p>
 
