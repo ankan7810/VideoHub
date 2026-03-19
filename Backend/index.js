@@ -54,7 +54,7 @@ if (cluster.isPrimary) {
 
   // Middlewares
   app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://videohub-qbq4.onrender.com",
     credentials: true
   }));
 
