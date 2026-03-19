@@ -5,8 +5,6 @@ import "video.js/dist/video-js.min.css";
 const VideoPlayer = ({ videoId }) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
-
-  // ✅ FIX 1: Use correct BASE_URL
   // const BASE_URL = "http://localhost:5000/streams";
   const BASE_URL = "https://videohub-7vd0.onrender.com/streams";
 
