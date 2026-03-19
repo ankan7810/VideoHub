@@ -1,3 +1,6 @@
+import cluster from "cluster";
+import process from "process";
+
 import express from "express";
 import dotenv from "dotenv";
 import { rateLimit } from "express-rate-limit";
@@ -7,6 +10,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
 
+// Routes
 import authrouter from "./Routes/Auth.routes.js";
 import videorouter from "./Routes/Video.Routes.js";
 import usserrouter from "./Routes/User.Routes.js";
@@ -15,23 +19,20 @@ import commentrouter from "./Routes/Comment.Routes.js";
 import likerouter from "./Routes/Like.Routes.js";
 import subscriptionrouter from "./Routes/Subscription.Routes.js";
 
-import cluster from "cluster";
-import os from "os";
-import process from "process";
-
-dotenv.config({ path: "./.env" });
+dotenv.config();
 
 const port = process.env.PORT || 5000;
-const MAX_WORKERS = 4; // you can also use os.cpus().length
+const MAX_WORKERS = 2; // ✅ SAFE FIXED VALUE
 
 if (cluster.isPrimary) {
-  console.log(`🚀 Forking ${MAX_WORKERS} workers...\n`);
+  console.log(`🚀 Primary ${process.pid} running`);
+  console.log(`👷 Forking ${MAX_WORKERS} worker...\n`);
 
   for (let i = 0; i < MAX_WORKERS; i++) {
     cluster.fork();
   }
 
-  cluster.on("exit", (worker, code, signal) => {
+  cluster.on("exit", (worker) => {
     console.log(`❌ Worker ${worker.process.pid} died. Restarting...`);
     cluster.fork();
   });
@@ -39,34 +40,41 @@ if (cluster.isPrimary) {
 } else {
   const app = express();
 
+  // ✅ FIX FOR RENDER
+  app.set("trust proxy", 1);
+
   process.on("uncaughtException", (err) => {
-    console.error("Uncaught Exception:", err);
+    console.error("❌ Uncaught Exception:", err);
   });
 
   process.on("unhandledRejection", (err) => {
-    console.error("Unhandled Rejection:", err);
+    console.error("❌ Unhandled Rejection:", err);
   });
 
-  connectdb().catch((err) => {
-    console.error("DB Connection Failed:", err);
-    process.exit(1);
-  });
+  // DB
+  connectdb()
+    .then(() => console.log(`✅ DB Connected (Worker ${process.pid})`))
+    .catch((err) => {
+      console.error("❌ DB Connection Failed:", err);
+      process.exit(1);
+    });
 
   // Middlewares
-  app.use(cors({
-    origin: "https://videohub-fr.onrender.com",
-    credentials: true
-  }));
+ app.use(cors({ 
+  origin: "https://videohub-frontend-7037.onrender.com", 
+  credentials: true 
+} ));
 
   app.use(helmet());
 
   const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000,
+    windowMs: 60 * 1000,
     limit: 100,
-    message: "Too many requests, please try again later"
+    message: "Too many requests, try again later"
   });
 
   app.use(limiter);
+
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
@@ -77,9 +85,10 @@ if (cluster.isPrimary) {
   );
 
   app.get("/", (req, res) => {
-    res.send("Backend API running");
+    res.send(`🚀 Running on worker ${process.pid}`);
   });
 
+  // Routes
   app.use("/api/v1/auth", authrouter);
   app.use("/api/v1/videos", videorouter);
   app.use("/api/v1/users", usserrouter);
