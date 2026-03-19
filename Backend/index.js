@@ -64,7 +64,7 @@ app.use(cookieParser());
 // ✅ Static folder (for HLS streams)
 app.use(
   "/streams",
-  express.static(path.join(process.cwd(), "hls-output"))
+  express.static(path.join(process.cwd(),"streams"))
 );
 
 // ✅ Health Check Route
