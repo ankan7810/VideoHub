@@ -199,7 +199,7 @@ export const sendResetLink = async (req, res) => {
       });
     }
 
-    const resetLink = `http://localhost:5173/reset-password?email=${email}`;
+    const resetLink = `https://youtube-frontend-tp0q.onrender.com/reset-password?email=${email}`;
 
     await sendOtpMail(email, resetLink); // you can rename later
 
