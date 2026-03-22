@@ -2,9 +2,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import dns from "dns";
 
-dotenv.config({
-    path:'./.env'
-});
+dotenv.config();
 dns.setDefaultResultOrder("ipv4first");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
