@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendOtpMail = async (to, token) => {
 
-  const resetLink = `https://youtube-frontend-tp0q.onrender.com/reset-password?email=${to}&token=${token}`;
+  const resetLink = `https://youtube-frontend-0hj6.onrender.com/reset-password?email=${to}&token=${token}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL,
@@ -55,7 +55,7 @@ export const sendOtpMail = async (to, token) => {
   <p style="font-size:12px; color:gray">
 
   By using VideHub you agree to our  
-  <a href="https://youtube-frontend-tp0q.onrender.com/privacy-policy">Privacy Policy</a>  
+  <a href="https://youtube-frontend-0hj6.onrender.com/privacy-policy">Privacy Policy</a>  
   and  
   <a href="https://youtube-frontend-tp0q.onrender.com/terms">Terms of Service</a>.
 
