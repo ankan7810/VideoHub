@@ -42,7 +42,7 @@ connectdb()
   });
 
 // ✅ CORS (Update frontend URL here)
-app.use(cors({ origin: "https://youtube-frontend-tp0q.onrender.com", credentials: true }));
+app.use(cors({ origin: "https://youtube-frontend-0hj6.onrender.com", credentials: true }));
 
 // ✅ Security
 app.use(helmet());
